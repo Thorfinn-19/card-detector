@@ -3,9 +3,9 @@ from pathlib import Path
 import random
 import numpy as np
 
-CARDS_DIR = Path("assets/cards")
-TEXTURE_DIR = Path("assets/texture")
-DATASET_DIR = Path("datasets/yolo_cards")
+CARDS_DIR = Path("C:/Gepi latas/card-detector/assets/cards")
+TEXTURE_DIR = Path("C:/Gepi latas/card-detector/assets/texture")
+DATASET_DIR = Path("C:/Gepi latas/card-detector/datasets/yolo_cards")
 
 card_paths = list(CARDS_DIR.glob("*.png"))
 bg_paths = list(TEXTURE_DIR.glob("*.jpg"))
@@ -73,13 +73,13 @@ def yolo_label(class_id, box, img_size=640):
     return f"{class_id} {cx/img_size:.6f} {cy/img_size:.6f} {bw/img_size:.6f} {bh/img_size:.6f}"
 
 def make_dirs():
-    for split in ["train", "val", "test"]:
+    for split in ["test medium"]:
         (DATASET_DIR / "images" / split).mkdir(parents=True, exist_ok=True)
         (DATASET_DIR / "labels" / split).mkdir(parents=True, exist_ok=True)
 
 def generate_one_image():
     bg = random.choice(backgrounds).copy()
-    chosen_cards = random.sample(class_names, 5)
+    chosen_cards = random.sample(class_names, 3)
 
     placed_centers = []
     labels = []
@@ -130,6 +130,6 @@ def save_split(split, count, start_idx=0):
 
 make_dirs()
 
-save_split("train", 4000, 0)
-save_split("val", 500, 4000)
-save_split("test", 500, 4500)
+#save_split("train", 4000, 0)
+#save_split("val", 500, 4000)
+save_split("test medium", 500, 5500)
