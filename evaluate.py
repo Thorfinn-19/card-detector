@@ -1,1 +1,0 @@
-model.val(data="easy.yaml")
